@@ -7,6 +7,18 @@ exports.up = function(knex) {
       .notNullable()
       .unique();
   });
+  // .createTable("students", function(tbl) {
+  //   tbl.increments();
+  //   tbl.string("name", 128).notNullable();
+
+  //   tbl
+  //     .integer("cohort_id")
+  //     .unsigned()
+  //     .references("id")
+  //     .inTable("cohorts")
+  //     .onDelete("CASCADE")
+  //     .onUpdate("CASCADE");
+  // });
 };
 
 exports.down = function(knex) {
