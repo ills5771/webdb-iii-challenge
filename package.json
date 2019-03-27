@@ -1,7 +1,5 @@
-
-
 {
-"name": "webdb-iii-challenge",
+  "name": "webdb-iii-challenge",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,7 +8,6 @@
   "repository": "https://github.com/ills5771/webdb-iii-challenge.git",
   "author": "ills5771 <ilyayelizarov1@gmail.com>",
   "license": "MIT",
-  
   "dependencies": {
     "express": "^4.16.4",
     "helmet": "^3.16.0",
@@ -20,5 +17,4 @@
   "devDependencies": {
     "nodemon": "^1.18.10"
   }
-  
 }

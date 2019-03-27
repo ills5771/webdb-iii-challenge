@@ -15,8 +15,29 @@ const db = knex(knexConfig);
 const server = express();
 
 server.use(helmet());
-
 server.use(express.json());
+
+server.get("/api/cohorts", async (req, res) => {
+  try {
+    const cohorts = await db("cohorts");
+    res.status(200).json(cohorts);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+server.post("/api/cohorts", async (req, res) => {
+  try {
+    const [id] = await db("cohorts").insert(req.body);
+    const cohort = await db("cohorts")
+      .where({ id })
+      .first();
+    res.status(201).json(cohort);
+  } catch (error) {
+    const message = errors[error.errno] || "We couldn't add the cohort";
+    res.status(500).json({ message, error });
+  }
+});
 
 const port = process.env.PORT || 4000;
 server.listen(port, () =>
