@@ -25,6 +25,23 @@ server.get("/api/cohorts", async (req, res) => {
     res.status(500).json(error);
   }
 });
+server.get("/api/cohorts/:id", async (req, res) => {
+  try {
+    const cohort = await db("cohorts")
+      .where({ id: req.params.id })
+      .first();
+    if (cohort) {
+      res.status(201).json(cohort);
+    } else {
+      res.status(404).json({ message: "That cohort does not exist" });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+const errors = {
+  "19": "Another cohort with that value exists"
+};
 
 server.post("/api/cohorts", async (req, res) => {
   try {
