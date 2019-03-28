@@ -26,6 +26,21 @@ server.get("/api/cohorts", async (req, res) => {
     res.status(500).json(error);
   }
 });
+function getStudentCohort(cohortId) {
+  return db("students as s")
+    .join("cohorts as c", "c.id", "s.cohort_id")
+    .select("s.id", "s.name", "c.name")
+    .where("s.cohort_id", cohortId);
+}
+server.get("/api/cohorts/:id/students", async (req, res) => {
+  try {
+    const studCohorts = await getStudentCohort(req.params.id);
+    res.status(200).json(studCohorts);
+  } catch (error) {
+    res.status(500).json({ message: "We ran into an error" });
+  }
+});
+
 server.get("/api/students", async (req, res) => {
   try {
     const students = await db("students");
